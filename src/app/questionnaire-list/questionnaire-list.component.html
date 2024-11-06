@@ -1,0 +1,14 @@
+<div class="divCss">
+  <label>問卷名稱：</label>
+  <input style="width: 80%;" [(ngModel)]="quesName">
+  <br><br>
+  <label>統計時間：</label>
+  <input style="width: 35%;" type="date" [(ngModel)]="sDate">
+  到
+  <input style="width: 35%;" type="date"  [(ngModel)]="eDate">
+  <button class="searchBntCss" (click)="searchBnt()">搜尋</button>
+</div>
+
+<br>
+
+<app-mat-table></app-mat-table>
