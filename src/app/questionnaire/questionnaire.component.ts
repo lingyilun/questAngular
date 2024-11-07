@@ -114,6 +114,15 @@ export class QuestionnaireComponent {
     // 分別拿來給文字輸入(answer)跟單選(radioAnswer)放他的答案
     for (let array of this.quest.questArray) {
       this.newQuestArray.push({ ...array, answer: '', radioAnswer: '' });
+      // 上者等於下者寫法
+      // this.newQuestArray.push({ 
+      //   questId: array.questId,
+      //   need: array.need,
+      //   questName: array.questName,
+      //   type: array.type,
+      //   options: array.options, 
+      //   answer: '', 
+      //   radioAnswer: '' });
     }
 
     // 在問題的選擇中加入boxBoolean讓checkbox去進行資料綁定
