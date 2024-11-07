@@ -30,4 +30,10 @@ export class PreviewComponent {
   goBack() {
     this.router.navigate(['/questionnaire']);
   }
+
+  goList() {
+    // 儲存成功後記得將Service中的資料清空避免資料錯誤
+    this.questService.questData = ''; 
+    this.router.navigate(['/list']);
+  }
 }
