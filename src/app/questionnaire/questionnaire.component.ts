@@ -96,9 +96,11 @@ export class QuestionnaireComponent {
   ) { }
 
   ngOnInit(): void {
+    // 當我們判斷service中沒有這個資料 就等於不是從預覽回來需要重新組合資料
     if (!this.questService.questData) {
       this.tidyQuestArray();
     } else {
+      // 當有資料的話就要將使用者的資料塞進欄位
       this.userName = this.questService.questData.userName;
       this.userPhone = this.questService.questData.userPhone;
       this.userEmail = this.questService.questData.userEmail;
@@ -125,6 +127,7 @@ export class QuestionnaireComponent {
   }
 
   goPreview() {
+    // 判斷完必填都結束後將資料打包並換頁
     if (this.checkNeed()) {
       this.questService.questData = {
         title: this.quest.title,

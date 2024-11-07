@@ -45,6 +45,8 @@
 
         @if (quest.type == 'Q') {
             @for (option of quest.options; track $index) {
+                <!-- radio注意要有name作為判斷這些radio是同一群組 -->
+                <!-- value是選了這個選項對應的ngModel中的值 -->
                 <input type="radio" name="{{quest.questId}}" value="{{option.code}}" 
                        [(ngModel)]="quest.radioAnswer">
                     {{ option.optionName }}
