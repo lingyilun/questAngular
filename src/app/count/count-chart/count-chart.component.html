@@ -1,0 +1,22 @@
+<div class="divCss">
+    @if (questData.type != 'T') {
+        <div class="canvasCss">
+            <canvas id="{{dataId}}"></canvas>
+        </div>
+    }
+    <h3>
+        題目： {{questData.name}}
+        @if (questData.type != 'T') {
+            @for (label of questData.labels; track $index) {
+                <h5 style="padding-left: 15px;">
+                    選項： {{ questData.labels[$index] }}
+                    <span style="float: right;">{{ questData.data[$index] }}</span>
+                </h5>
+            }
+        } @else {
+            @for (data of questData.data; track $index) {
+                <h5 class="typeTCss">{{data}}</h5>
+            }
+        }
+    </h3>
+</div>
