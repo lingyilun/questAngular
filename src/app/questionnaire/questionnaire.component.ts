@@ -28,7 +28,8 @@ export class QuestionnaireComponent {
               問卷說明問卷說明問卷說明問卷說明問卷說明問卷說明\
               問卷說明問卷說明問卷說明問卷說明問卷說明問卷說明\
               問卷說明問卷說明問卷說明問卷說明問卷說明問卷說明',
-    questArray: [{
+    questArray: [
+    {
       questId: 1,
       need: true,
       questName: '請選擇最喜歡的運動',

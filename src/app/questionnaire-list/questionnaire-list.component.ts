@@ -4,12 +4,16 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTableComponent } from '../mat-table/mat-table.component';
 import { DateService } from '../../@services/date.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-questionnaire-list',
   standalone: true,
-  imports: [FormsModule,
-            MatTableComponent],
+  imports: [
+    FormsModule,
+    MatTableComponent,
+    MatButtonModule
+  ],
   templateUrl: './questionnaire-list.component.html',
   styleUrl: './questionnaire-list.component.scss'
 })

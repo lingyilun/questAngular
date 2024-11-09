@@ -6,17 +6,17 @@
   <!-- 設定最大(maxDate)最小(minDate)選擇時間 -->
   <!-- 別且將使用者選擇的內容使用ngModel做綁定 -->
   <!-- 當使用者選擇完起始時間觸發更改結束時間的最大值 -->
-  <input style="width: 35%;" type="date" 
+  <input style="width: 32%;" type="date" 
          [(ngModel)]="sDate" [min]="minDate" 
          [max]="maxDate" (change)="changeSDate()">
   到
   <!-- 當起始時間為選擇時，不能選擇結束時間(disabled) -->
   <!-- 最小時間為使用者選擇的起始時間 -->
   <!-- 結束時間的max值為使用者選擇完起始時間後去設定的changeSDate() -->
-  <input style="width: 35%;" type="date" 
+  <input style="width: 32%;" type="date" 
          [disabled]="!sDate" [(ngModel)]="eDate" 
          [min]="sDate" [max]="eMaxDate">
-  <button class="searchBntCss" (click)="searchBnt()">搜尋</button>
+  <button mat-stroked-button style="color: #fff;" class="searchBntCss" (click)="searchBnt()">搜尋</button>
 </div>
 
 <br>

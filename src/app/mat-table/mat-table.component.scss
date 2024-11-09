@@ -1,6 +1,8 @@
 .urlCss {
   color: #004dff;
   text-decoration: underline;
+  // cursor為變更鼠標為手指的css
+  cursor: pointer; 
 }
 
 .tableCss  {
@@ -13,6 +15,10 @@
 
   tr:nth-child(odd){
     background-color: #c6c6c6;
+  }
+
+  tr:hover {
+    background-color: #1f95ff;
   }
 }
 

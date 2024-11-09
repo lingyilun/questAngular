@@ -10,7 +10,10 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> 名稱 </th>
-      <td mat-cell *matCellDef="let element" [ngClass]="{'urlCss': element.statusCode == 'S'}"> {{element.name}} </td>
+      <td mat-cell *matCellDef="let element" [routerLink]="['/questionnaire']"
+        [ngClass]="{'urlCss': element.statusCode == 'S'}">
+        {{element.name}}
+      </td>
     </ng-container>
 
     <!-- Status Column -->
@@ -34,7 +37,8 @@
     <!-- EductId Column -->
     <ng-container matColumnDef="eductId">
       <th mat-header-cell *matHeaderCellDef> 結果 </th>
-      <td mat-cell *matCellDef="let element" [ngClass]="{'urlCss': element.statusCode == 'E'}"> 前往 </td>
+      <td mat-cell *matCellDef="let element" [routerLink]="['/count']"
+        [ngClass]="{'urlCss': element.statusCode == 'E'}"> 前往 </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
