@@ -21,14 +21,13 @@ export class CountChartComponent {
   // 這個生命週期為當頁面渲染結束後才會觸發
   ngAfterViewInit(): void {
     this.createPie();
-    console.log(this.questData);
-    
   }
 
   createPie() {
     // 獲取 canvas 元素
+    // 使用題目ID當作canvas的ID來分類
+    // 否則ID重複程式會失敗
     let ctx = document.getElementById(this.dataId) as HTMLCanvasElement;
-    console.log(ctx);
     
     // 設定數據
     let data = {
