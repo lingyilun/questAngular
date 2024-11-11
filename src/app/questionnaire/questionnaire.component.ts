@@ -191,4 +191,8 @@ export class QuestionnaireComponent {
     }
     return true;
   }
+
+  goBack() {
+    this.router.navigate(['/list']);
+  }
 }

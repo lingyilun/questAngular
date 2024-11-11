@@ -1,1 +1,6 @@
 <router-outlet></router-outlet>
+
+@if (loading$ | async) {
+    <div class="overlay"></div>
+    <mat-spinner [diameter]="70"></mat-spinner>
+}

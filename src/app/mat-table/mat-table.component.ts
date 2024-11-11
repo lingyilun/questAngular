@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-mat-table',
@@ -23,17 +23,28 @@ export class MatTableComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
 
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    console.log(this.dataSource.paginator);
-
     this.dataSource.paginator._intl.itemsPerPageLabel = "請選擇每頁顯示數量";
   }
 
+  goCount(element: any) {
+    if (element.statusCode == 'E') {
+      this.router.navigate(['/count']);
+    }
+  }
+
+  goQuestionnaire(element: any) {
+    if (element.statusCode == 'S') {
+      this.router.navigate(['/questionnaire']);
+    }
+  }
 }
 
 export interface PeriodicElement {
