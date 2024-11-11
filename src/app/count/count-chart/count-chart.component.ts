@@ -11,7 +11,7 @@ import Chart from 'chart.js/auto';
 export class CountChartComponent {
   @Input() dataId!: string;
   @Input() questData!: any;
-  
+
   constructor() { }
 
   ngOnInit(): void {
@@ -28,7 +28,7 @@ export class CountChartComponent {
     // 使用題目ID當作canvas的ID來分類
     // 否則ID重複程式會失敗
     let ctx = document.getElementById(this.dataId) as HTMLCanvasElement;
-    
+
     // 設定數據
     let data = {
       // x 軸文字
@@ -45,11 +45,13 @@ export class CountChartComponent {
       ],
     };
 
-    // 創建圖表
-    let chart = new Chart(ctx, {
-      //pie是圓餅圖,doughnut是環狀圖
-      type: 'pie',
-      data: data,
-    });
+    if (ctx) {
+      // 創建圖表
+      let chart = new Chart(ctx, {
+        //pie是圓餅圖,doughnut是環狀圖
+        type: 'pie',
+        data: data,
+      });
+    }
   }
 }
