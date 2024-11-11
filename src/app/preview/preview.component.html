@@ -62,8 +62,11 @@
             }
 
             @if (quest.type == 'T') {
-                <h3>{{quest.answer}}</h3>
-                <!-- <textarea [(ngModel)]="quest.answer" [disabled]="true"></textarea> -->
+                @if (quest.answer) {
+                    <h3>{{quest.answer}}</h3>
+                } @else { 
+                    <span>無</span>
+                }
             }
         }
     </ol>
