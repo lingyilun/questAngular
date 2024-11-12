@@ -1,0 +1,70 @@
+.divCss {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    .cardCss {
+        width: 50%;
+        height: 60%;
+        text-align: center;
+    }
+}
+
+.passwordCss {
+    position: relative;
+    .passwordIcon {
+        position: absolute;
+        top: 1px;
+        right: 28%;
+        cursor: pointer;
+        font-size: 24px;
+    }
+}
+
+  
+  .user-box {
+    position: relative;
+    margin: 30px;
+  }
+  
+  .user-box input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 2px solid #333;
+    outline: none;
+    background: transparent;
+  }
+  
+  .user-box label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #333;
+    pointer-events: none;
+    transition: 0.5s;
+  }
+  
+  .user-box input:focus ~ label,
+  .user-box input:valid ~ label {
+    transform: translateY(-20px);
+    font-size: 14px;
+    color: #333;
+  }
+  
+  
+  .password-toggle-icon {
+    position: absolute;
+    top: 40%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  
+  

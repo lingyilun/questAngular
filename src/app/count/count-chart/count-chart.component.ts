@@ -28,7 +28,7 @@ export class CountChartComponent {
     // 使用題目ID當作canvas的ID來分類
     // 否則ID重複程式會失敗
     let ctx = document.getElementById(this.dataId) as HTMLCanvasElement;
-
+    
     // 設定數據
     let data = {
       // x 軸文字
