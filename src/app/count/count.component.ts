@@ -1,13 +1,19 @@
+import { UserService } from './../../@services/user.service';
 import { Component } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { CountChartComponent } from "./count-chart/count-chart.component";
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-count',
   standalone: true,
-  imports: [CountChartComponent, MatButtonModule],
+  imports: [
+    CountChartComponent, 
+    MatButtonModule,
+    CommonModule
+  ],
   templateUrl: './count.component.html',
   styleUrl: './count.component.scss'
 })
@@ -45,9 +51,16 @@ export class CountComponent {
       }
     ]
   }
-  constructor(private router: Router) { }
+
+  isAdmin = false;
+
+  constructor(
+    private router: Router,
+    private userService: UserService,
+  ) { }
 
   ngOnInit(): void {
+    this.isAdmin = this.userService.isAdmin;
   }
 
   goBack() {

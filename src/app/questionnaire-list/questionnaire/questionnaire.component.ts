@@ -1,6 +1,7 @@
+import { UserService } from './../../../@services/user.service';
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { Router } from '@angular/router';
@@ -91,19 +92,33 @@ export class QuestionnaireComponent {
   userPhone!: string;
   userEmail!: string;
   userAge!: string;
+  title!: string;
+  sDate!: string;
+  eDate!: string;
+  explain!: string;
+  isAdmin = false;
 
   constructor(
     private questService: QuestService,
     private router: Router,
-    private fb: FormBuilder
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
+    this.isAdmin = this.userService.isAdmin;
+    this.title = this.quest.title;
+    this.sDate = this.quest.sDate;
+    this.eDate = this.quest.eDate;
+    this.explain = this.quest.explain;
     // 當我們判斷service中沒有這個資料 就等於不是從預覽回來需要重新組合資料
     if (!this.questService.questData) {
       this.tidyQuestArray();
     } else {
       // 當有資料的話就要將使用者的資料塞進欄位
+      this.title = this.questService.questData.title;
+      this.sDate = this.questService.questData.sDate;
+      this.eDate = this.questService.questData.eDate;
+      this.explain = this.questService.questData.explain;
       this.userName = this.questService.questData.userName;
       this.userPhone = this.questService.questData.userPhone;
       this.userEmail = this.questService.questData.userEmail;
@@ -136,6 +151,7 @@ export class QuestionnaireComponent {
       }
       newArray.options = options;
     }
+    
   }
 
   goPreview() {
@@ -152,8 +168,8 @@ export class QuestionnaireComponent {
         userAge: this.userAge,
         questArray: this.newQuestArray
       }
-      console.log(this.questService.questData );
-      
+      console.log(this.questService.questData);
+
       this.router.navigate(['/preview']);
     };
   }
@@ -198,5 +214,14 @@ export class QuestionnaireComponent {
 
   goBack() {
     this.router.navigate(['/list']);
+  }
+
+  adminGoBack() {
+    this.router.navigate(['/tabs-admin/add-option']);
+  }
+
+  save() {
+    this.questService.questData = null;
+    this.router.navigate(['/list-admin']);
   }
 }

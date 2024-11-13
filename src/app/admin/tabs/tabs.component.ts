@@ -20,8 +20,8 @@ export class TabsComponent {
   links = [
     { path: '/tabs-admin/add', name: '問卷' },
     { path: '/tabs-admin/add-option', name: '題目' },
-    { path: 'list', name: '問卷回饋' },
-    { path: 'list', name: '統計' },
+    { path: '/tabs-admin/feedbook', name: '問卷回饋' },
+    { path: '/tabs-admin/count', name: '統計' },
   ]
   activeLink = this.links[0].name;
   tabPanel!: any;
@@ -55,8 +55,9 @@ export class TabsComponent {
       if (path == '問卷回饋' || path == '統計') return true;
     } else if (this.questService.questState == 'E' || this.questService.questState == 'S') {
       if (path == '問卷' || path == '題目') return true;
+    } else if(this.questService.questState = 'ADD'){
+      if (path == '問卷回饋' || path == '統計'|| path == '題目') return true;
     }
-
     return false;
   }
 }

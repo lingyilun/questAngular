@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { DateService } from '../../../../@services/date.service';
+import { QuestService } from '../../../../@services/quset.service';
 
 @Component({
   selector: 'app-add-quest',
@@ -26,6 +27,7 @@ export class AddQuestComponent {
   constructor(
     private dateService: DateService,
     private router: Router,
+    private questService: QuestService,
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +35,12 @@ export class AddQuestComponent {
     this.minDate = this.dateService.changeDateFormat(new Date());
     // 設定選取日期最大值為當天
     this.maxDate = this.dateService.changeDateFormat(this.dateService.addDate(new Date(), 30));
+    if (this.questService.questData?.title) {
+      this.questName = this.questService.questData.title;
+      this.sDate = this.questService.questData.sDate;
+      this.eDate = this.questService.questData.eDate;
+      this.questExplain = this.questService.questData.explain;
+    }
   }
 
   changeSDate() {
@@ -40,6 +48,12 @@ export class AddQuestComponent {
   }
 
   goNextTab() {
+    this.questService.questData = {
+      title: this.questName,
+      sDate: this.sDate,
+      eDate: this.eDate,
+      explain: this.questExplain
+    }
     this.router.navigate(['/tabs-admin/add-option']);
   }
 }

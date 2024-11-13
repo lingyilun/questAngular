@@ -8,6 +8,7 @@ import { QuestListComponent } from './admin/quest-list/quest-list.component';
 import { TabsComponent } from './admin/tabs/tabs.component';
 import { AddQuestComponent } from './admin/tabs/add-quest/add-quest.component';
 import { AddQuestOptionComponent } from './admin/tabs/add-quest-option/add-quest-option.component';
+import { FeedbookComponent } from './admin/tabs/feedbook/feedbook.component';
 
 export const routes: Routes = [
   { path: 'list', component: QuestionnaireListComponent },
@@ -20,6 +21,8 @@ export const routes: Routes = [
     children:[
       { path: 'add', component: AddQuestComponent },
       { path: 'add-option', component: AddQuestOptionComponent },
+      { path: 'count', component: CountComponent },
+      { path: 'feedbook', component: FeedbookComponent },
     ]
    },
   { path: '', redirectTo: '/list', pathMatch: 'full' },

@@ -28,7 +28,7 @@ export class MatTableComponent implements AfterViewInit {
   displayedColumns: string[] = ['id', 'name', 'status', 'sDate', 'eDate', 'eductId'];
   dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
   selection = new SelectionModel<PeriodicElement>(true, []);
-  selectData = output<any[]>() 
+  selectData = output<any[]>()
   isAdmin = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -50,8 +50,8 @@ export class MatTableComponent implements AfterViewInit {
   // checkBox多選重置
   ngOnChanges() {
     this.dataSource.data = this.ELEMENT_DATA;
-    this.selection.clear()
-  }   
+    this.selection.clear();
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -71,7 +71,7 @@ export class MatTableComponent implements AfterViewInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
-    this.outputData();  
+    this.outputData();
   }
 
   goCount(element: any) {
@@ -81,7 +81,7 @@ export class MatTableComponent implements AfterViewInit {
   }
 
   outputData() {
-    let checkData:Array<any> = [];
+    let checkData: Array<any> = [];
     this.selection.selected.forEach(s => checkData.push(s));
     this.selectData.emit(checkData);
   }
@@ -89,7 +89,13 @@ export class MatTableComponent implements AfterViewInit {
   goQuestionnaire(element: any) {
     if (this.isAdmin) {
       this.questService.questState = element.statusCode;
-      this.router.navigate(['/tabs-admin/add']);
+      this.questService.questData = SERVICE_DATA;
+      // P:尚未開始 E:已結束 N:未發布 S:進行中
+      if (this.questService.questState == 'P' || this.questService.questState == 'N') {
+        this.router.navigate(['/tabs-admin/add']);
+      } else if (this.questService.questState == 'E' || this.questService.questState == 'S') {
+        this.router.navigate(['/tabs-admin/feedbook']);
+      }
     } else if (element.statusCode == 'S') {
       this.router.navigate(['/questionnaire']);
     }
@@ -105,3 +111,61 @@ export interface PeriodicElement {
   eductId: string;
   statusCode: string;
 }
+
+
+const SERVICE_DATA = {
+  title: "問卷名稱",
+  sDate: "2024-11-19",
+  eDate: "2024-11-29",
+  explain: "問卷說明",
+  questArray: [
+    {
+        "questId": 0,
+        "need": false,
+        "questName": "問題1",
+        "type": "Q",
+        "options": [
+            {
+                "optionName": "aa",
+                "code": 0
+            },
+            {
+                "optionName": "bb",
+                "code": 1
+            }
+        ]
+    },
+    {
+        "questId": 1,
+        "need": true,
+        "questName": "問題2",
+        "type": "M",
+        "options": [
+            {
+                "optionName": "cc",
+                "code": 0
+            },
+            {
+                "optionName": "dd",
+                "code": 1
+            }
+        ]
+    },
+    {
+        "questId": 2,
+        "need": false,
+        "questName": "問題3",
+        "type": "T",
+        "options": [
+            {
+                "optionName": "",
+                "code": 0
+            },
+            {
+                "optionName": "",
+                "code": 1
+            }
+        ]
+    }
+  ],
+};

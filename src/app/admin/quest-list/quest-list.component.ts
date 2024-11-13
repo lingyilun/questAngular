@@ -1,3 +1,4 @@
+import { QuestService } from './../../../@services/quset.service';
 import { UserService } from './../../../@services/user.service';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -33,6 +34,7 @@ export class QuestListComponent {
     private dateService: DateService,
     private router: Router,
     private userService: UserService,
+    private questService: QuestService,
   ) { }
 
   ngOnInit(): void {
@@ -75,6 +77,7 @@ export class QuestListComponent {
   }
 
   goAdd() {
+    this.questService.questState = 'ADD';
     this.router.navigate(['/tabs-admin/add']);
   }
 
@@ -97,7 +100,7 @@ export interface PeriodicElement {
 const ELEMENT_DATA: PeriodicElement[] = [
   { id: 1, name: 'A1', statusCode: 'P', status: '尚未開始', sDate: '2024-11-05', eDate: '2024-12-01', eductId: '1' },
   { id: 2, name: 'A2', statusCode: 'E', status: '已結束', sDate: '2024-11-06', eDate: '2024-12-02', eductId: '2' },
-  { id: 3, name: 'A3', statusCode: 'E', status: '已結束', sDate: '2024-11-08', eDate: '2024-12-03', eductId: '3' },
+  { id: 3, name: 'A3', statusCode: 'N', status: '未發布', sDate: '2024-11-08', eDate: '2024-12-03', eductId: '3' },
   { id: 4, name: 'A4', statusCode: 'E', status: '已結束', sDate: '2024-11-15', eDate: '2024-12-04', eductId: '4' },
   { id: 5, name: 'B1', statusCode: 'S', status: '進行中', sDate: '2024-11-05', eDate: '2024-12-05', eductId: '5' },
   { id: 6, name: 'B2', statusCode: 'E', status: '已結束', sDate: '2024-11-07', eDate: '2024-12-06', eductId: '6' },

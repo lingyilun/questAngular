@@ -1,1 +1,75 @@
-<p>add-quest-option works!</p>
+<div class="divCss">
+    <div>
+        @if (isEdit) {
+        <span style="color: red;">編輯中！</span><br><br>
+        }
+
+        <label>問卷：</label>
+        <input type="text" class="textInputCss" [(ngModel)]="questName">
+
+        <select [(ngModel)]="questStats" class="selectCss" (change)="changeSelect()">
+            <option value="Q">單選</option>
+            <option value="M">多選</option>
+            <option value="T">文字</option>
+        </select>
+        <span style="margin-left: 5%;"></span>
+        <label>是否必填</label>
+        <input type="checkbox" [(ngModel)]="needCheckBox">
+    </div><br>
+
+    @if (questStats != 'T') {
+    <div class="questDivCss">
+        <button class="addBntCss" (click)="addQuest()">＋</button>
+        <div class="olCss">
+        <ol>
+            @for (quest of questArray;track $index) {
+            <li>
+                <input class="questCss" [(ngModel)]="quest.quest">
+                @if ($index > 1) {
+                <button class="rmBntCss" (click)="rmQuest($index)">一</button>
+                }
+            </li><br>
+            }
+        </ol>
+        </div>
+    </div><br>
+    }
+
+    <button mat-stroked-button style="float: right;" (click)="saveQuest()">確認</button>
+    <br><br><br>
+
+    <div style="border-bottom: 1px solid;"></div>
+    <br>
+    <mat-icon class="delIconCss" fontIcon="delete" (click)="del()"></mat-icon>
+    <table>
+        <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">內容</th>
+                <th scope="col">種類</th>
+                <th scope="col">必填</th>
+                <th scope="col">編輯</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (quset of saveQuestArray; track $index) {
+            <tr>
+                <td>
+                    <input type="checkbox" [(ngModel)]="quset.checkBox">
+                </td>
+                <td>{{quset.questName}}</td>
+                <td>{{quset.questStatsName}}</td>
+                <td>
+                    <input type="checkbox" [disabled]="true" [(ngModel)]="quset.need">
+                </td>
+                <td class="urlCss" (click)="edit(quset)">編輯</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <br>
+    @if (saveQuestArray.length > 0) {
+    <button mat-stroked-button style="float: right;" (click)="goPreview()">預覽</button>
+    }
+    <br><br><br>
+</div>
