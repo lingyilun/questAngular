@@ -1,0 +1,11 @@
+::ng-deep {
+    .mat-mdc-tab-header.mat-mdc-tab-nav-bar-stretch-tabs .mat-mdc-tab-link {
+        background-color: #ffd7ab;
+        border-radius: 10px 10px 0 0;
+        margin-right: 2px;
+    }
+}
+
+::ng-deep .tabsCss {
+    background-color: #fff!important;
+}

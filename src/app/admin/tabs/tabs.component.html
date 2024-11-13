@@ -1,0 +1,13 @@
+<nav mat-tab-nav-bar [tabPanel]="tabPanel" style="margin-top: 5%;">
+    @for (link of links; track link) {
+      <a mat-tab-link
+        (click)="activeLink = link.name"
+        [routerLink]="[link.path]"
+        [active]="activeLink == link.name"
+        [disabled]="checkStats(link.name)"
+        [ngClass]="{'tabsCss': activeLink == link.name}"> {{link.name}} </a>
+    }
+  </nav>
+  <mat-tab-nav-panel #tabPanel>
+    <router-outlet></router-outlet>
+  </mat-tab-nav-panel>

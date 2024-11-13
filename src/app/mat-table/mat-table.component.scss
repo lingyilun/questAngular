@@ -2,10 +2,10 @@
   color: #004dff;
   text-decoration: underline;
   // cursor為變更鼠標為手指的css
-  cursor: pointer; 
+  cursor: pointer;
 }
 
-.tableCss  {
+.tableCss {
   th {
     color: #fff;
     background-color: #515151;
@@ -13,7 +13,7 @@
     border-right: 1px solid #fff;
   }
 
-  tr:nth-child(odd){
+  tr:nth-child(odd) {
     background-color: #c6c6c6;
   }
 
@@ -22,4 +22,8 @@
   }
 }
 
-
+::ng-deep {
+  .mat-mdc-checkbox .mdc-form-field .mdc-checkbox .mdc-checkbox__background {
+    border-color: #004dff !important;
+  }
+}

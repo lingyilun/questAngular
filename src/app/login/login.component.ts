@@ -40,6 +40,6 @@ export class LoginComponent {
 
   login() {
     this.userService.isAdmin = true;
-    this.router.navigate(['/list']);
+    this.router.navigate(['/list-admin']);
   }
 }

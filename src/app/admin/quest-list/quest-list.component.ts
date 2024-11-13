@@ -1,38 +1,42 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { UserService } from './../../../@services/user.service';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatTableComponent } from '../mat-table/mat-table.component';
-import { DateService } from '../../@services/date.service';
 import { MatButtonModule } from '@angular/material/button';
+import { MatTableComponent } from '../../mat-table/mat-table.component';
 import { Router } from '@angular/router';
+import { DateService } from '../../../@services/date.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-questionnaire-list',
+  selector: 'app-quest-list',
   standalone: true,
   imports: [
     FormsModule,
     MatTableComponent,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
-  templateUrl: './questionnaire-list.component.html',
-  styleUrl: './questionnaire-list.component.scss'
+  templateUrl: './quest-list.component.html',
+  styleUrl: './quest-list.component.scss'
 })
-export class QuestionnaireListComponent {
+export class QuestListComponent {
   quesName!: string;
   sDate!: string;
   eDate!: string;
   minDate!: string;
   maxDate!: string;
   eMaxDate!: string;
+  selectData!: Array<any>;
   ELEMENT_DATA!: any;
 
   constructor(
     private dateService: DateService,
     private router: Router,
-  ) {}
+    private userService: UserService,
+  ) { }
 
   ngOnInit(): void {
+    this.userService.isAdmin = true;
     // 設定選取日期最小值為當天
     this.minDate = this.dateService.changeDateFormat(new Date());
     // 設定選取日期最大值為當天
@@ -44,14 +48,39 @@ export class QuestionnaireListComponent {
     this.eMaxDate = this.dateService.changeDateFormat(this.dateService.addDate(new Date(this.sDate), 30));
   }
 
+  del() {
+    // 使用新陣列取得刪除後的內容 並且最後將內容取代觸發table內容變更
+    let newData = [];
+    for (let data of this.ELEMENT_DATA) newData.push(data);
+    for (let i = 0; i < newData.length; i++) {
+      for (let selectData of this.selectData) {
+        if (selectData.id == newData[i].id) {
+          newData.splice(i,1)
+        }
+      }
+    }
+    this.ELEMENT_DATA = newData;
+  }
+
+  setSelectData(selectData: Array<any>) {
+    this.selectData = selectData;
+    console.log(this.selectData);
+    
+  }
+
   searchBnt() {
     console.log(this.quesName);
     console.log(this.sDate);
     console.log(this.eDate);
   }
 
-  goLogin() {
-    this.router.navigate(['/login']);
+  goAdd() {
+    this.router.navigate(['/tabs-admin/add']);
+  }
+
+  logOut() {
+    this.userService.isAdmin = false;
+    this.router.navigate(['/list']);
   }
 }
 
@@ -68,7 +97,7 @@ export interface PeriodicElement {
 const ELEMENT_DATA: PeriodicElement[] = [
   { id: 1, name: 'A1', statusCode: 'P', status: '尚未開始', sDate: '2024-11-05', eDate: '2024-12-01', eductId: '1' },
   { id: 2, name: 'A2', statusCode: 'E', status: '已結束', sDate: '2024-11-06', eDate: '2024-12-02', eductId: '2' },
-  { id: 3, name: 'A3', statusCode: 'N', status: '未發布', sDate: '2024-11-08', eDate: '2024-12-03', eductId: '3' },
+  { id: 3, name: 'A3', statusCode: 'E', status: '已結束', sDate: '2024-11-08', eDate: '2024-12-03', eductId: '3' },
   { id: 4, name: 'A4', statusCode: 'E', status: '已結束', sDate: '2024-11-15', eDate: '2024-12-04', eductId: '4' },
   { id: 5, name: 'B1', statusCode: 'S', status: '進行中', sDate: '2024-11-05', eDate: '2024-12-05', eductId: '5' },
   { id: 6, name: 'B2', statusCode: 'E', status: '已結束', sDate: '2024-11-07', eDate: '2024-12-06', eductId: '6' },
