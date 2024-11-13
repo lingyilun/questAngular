@@ -22,6 +22,7 @@ export class TabsComponent {
     { path: '/tabs-admin/add-option', name: '題目' },
     { path: '/tabs-admin/feedbook', name: '問卷回饋' },
     { path: '/tabs-admin/count', name: '統計' },
+    { path: '/list-admin', name: '回列表' },
   ]
   activeLink = this.links[0].name;
   tabPanel!: any;

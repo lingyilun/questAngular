@@ -33,46 +33,50 @@
                 }
             </h5>
         </li>
-            <!-- 多選M 單選Q 文字輸入T -->
-            @if (quest.type == 'M') {
-                <ol>
-                    @for (option of quest.options; track $index) {
-                        @if (option.boxBoolean) {
-                            <li>
-                                <div>
-                                    <span>{{ option.optionName }}</span>
-                                </div><br>
-                            </li>
-                        }
-                    }
-                </ol>
+        <!-- 多選M 單選Q 文字輸入T -->
+        @if (quest.type == 'M') {
+        <ol>
+            @for (option of quest.options; track $index) {
+            @if (option.boxBoolean) {
+            <li>
+                <div>
+                    <span>{{ option.optionName }}</span>
+                </div><br>
+            </li>
             }
+            }
+        </ol>
+        }
 
-            @if (quest.type == 'Q') {
-                @if (quest.radioAnswer) {
-                    @for (option of quest.options; track $index) {
-                        @if (quest.radioAnswer == option.code) {
-                            <span>{{ option.optionName }}</span>
-                            <br>
-                        }
-                    }
-                } @else { 
-                    <span>無</span>
-                }
-            }
+        @if (quest.type == 'Q') {
+        @if (quest.radioAnswer) {
+        @for (option of quest.options; track $index) {
+        @if (quest.radioAnswer == option.code) {
+        <span>{{ option.optionName }}</span>
+        <br>
+        }
+        }
+        } @else {
+        <span>無</span>
+        }
+        }
 
-            @if (quest.type == 'T') {
-                @if (quest.answer) {
-                    <h3>{{quest.answer}}</h3>
-                } @else { 
-                    <span>無</span>
-                }
-            }
+        @if (quest.type == 'T') {
+        @if (quest.answer) {
+        <h3>{{quest.answer}}</h3>
+        } @else {
+        <span>無</span>
+        }
+        }
         }
     </ol>
 
     <div style="text-align: right;">
+        @if (isAdmin) {
+        <button style="margin-right: 5px;" (click)="adminGoBack()">回上頁</button>
+        } @else {
         <button style="margin-right: 5px;" (click)="goBack()">回上頁</button>
         <button (click)="goList()">儲存</button>
+        }
     </div><br>
 </div>

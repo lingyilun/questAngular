@@ -2,3 +2,42 @@
     background-color: #fff;
     padding: 5%;
 }
+
+table {
+    border-collapse: collapse;
+    border: 2px solid rgb(140 140 140);
+    font-family: sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    width: 100%;
+}
+
+thead,
+tfoot {
+    background-color: rgb(228 240 245);
+}
+
+th,
+td {
+    border: 1px solid rgb(160 160 160);
+    padding: 8px 10px;
+    text-align: center;
+    // 讓裡面文字過長自動換行
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+td:last-of-type {
+    text-align: center;
+}
+
+tbody>tr:nth-of-type(even) {
+    background-color: rgb(237 238 242);
+}
+
+.urlCss {
+    color: #004dff;
+    text-decoration: underline;
+    // cursor為變更鼠標為手指的css
+    cursor: pointer;
+}

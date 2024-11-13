@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { QuestService } from '../../../../@services/quset.service';
+import { UserService } from '../../../../@services/user.service';
 
 @Component({
   selector: 'app-preview',
@@ -16,13 +17,21 @@ import { QuestService } from '../../../../@services/quset.service';
 })
 export class PreviewComponent {
   questData!: any;
+  isAdmin = false;
+
   constructor(
     private questService: QuestService,
-    private router: Router
+    private router: Router,
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
+    this.isAdmin = this.userService.isAdmin;
     this.questData = this.questService.questData;
+  }
+
+  adminGoBack() {
+    this.router.navigate(['/tabs-admin/feedbook']);
   }
 
   goBack() {

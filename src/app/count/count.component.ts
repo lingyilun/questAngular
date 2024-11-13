@@ -53,6 +53,7 @@ export class CountComponent {
   }
 
   isAdmin = false;
+  showBack = false;
 
   constructor(
     private router: Router,
@@ -61,6 +62,7 @@ export class CountComponent {
 
   ngOnInit(): void {
     this.isAdmin = this.userService.isAdmin;
+    if (window.location.pathname == '/count') this.showBack = true;
   }
 
   goBack() {
