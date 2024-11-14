@@ -44,12 +44,6 @@ export class TabsComponent {
     });
   }
 
-  ngOnInit(): void {
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
-    
-  }
-
   // P:尚未開始 E:已結束 N:未發布 S:進行中
   checkStats(path: string): boolean {
     if (this.questService.questState == 'P' || this.questService.questState == 'N') {

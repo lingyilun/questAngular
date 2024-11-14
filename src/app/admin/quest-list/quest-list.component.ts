@@ -66,8 +66,6 @@ export class QuestListComponent {
 
   setSelectData(selectData: Array<any>) {
     this.selectData = selectData;
-    console.log(this.selectData);
-    
   }
 
   searchBnt() {
