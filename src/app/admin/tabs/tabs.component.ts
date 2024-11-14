@@ -45,13 +45,14 @@ export class TabsComponent {
   }
 
   // P:尚未開始 E:已結束 N:未發布 S:進行中
+  // 判斷頁籤是否要鎖定
   checkStats(path: string): boolean {
     if (this.questService.questState == 'P' || this.questService.questState == 'N') {
-      if (path == '問卷回饋' || path == '統計') return true;
+      if (path == '/tabs-admin/feedbook' || path == '/tabs-admin/count') return true;
     } else if (this.questService.questState == 'E' || this.questService.questState == 'S') {
-      if (path == '問卷' || path == '題目') return true;
+      if (path == '/tabs-admin/add' || path == '/tabs-admin/add-option') return true;
     } else if(this.questService.questState = 'ADD'){
-      if (path == '問卷回饋' || path == '統計'|| path == '題目') return true;
+      if (path == '/tabs-admin/feedbook' || path == '/tabs-admin/count'|| path == '/tabs-admin/add-option') return true;
     }
     return false;
   }

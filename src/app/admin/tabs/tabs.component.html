@@ -4,7 +4,7 @@
         (click)="activeLink = link.name"
         [routerLink]="[link.path]"
         [active]="activeLink == link.name"
-        [disabled]="checkStats(link.name)"
+        [disabled]="checkStats(link.path)"
         [ngClass]="{'tabsCss': activeLink == link.name}"> {{link.name}} </a>
     }
   </nav>

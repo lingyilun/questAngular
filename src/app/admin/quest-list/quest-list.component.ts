@@ -75,12 +75,15 @@ export class QuestListComponent {
   }
 
   goAdd() {
+    // 進入新增前先將內容還原
     this.questService.questData = null;
+    // 加入執行類型ADD或者EDIT
     this.questService.questState = 'ADD';
     this.router.navigate(['/tabs-admin/add']);
   }
 
   logOut() {
+    // 移除管理者權限
     this.userService.isAdmin = false;
     this.router.navigate(['/list']);
   }

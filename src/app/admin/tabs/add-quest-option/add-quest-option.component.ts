@@ -41,6 +41,7 @@ export class AddQuestOptionComponent {
   }
 
   resertQuestArray() {
+    // 初始設定預設兩個選項
     this.questOptionId = 1;
     this.questArray = [
       { id: 0, quest: '' },
@@ -96,14 +97,9 @@ export class AddQuestOptionComponent {
 
   saveQuest() {
     if (this.questName) {
-      // 多選M 單選Q 文字輸入T
       let questStatsName = this.getQuestStatsName(this.questStats);
 
       if (this.questStats != 'T') {
-        if (this.questArray.length < 2) {
-          alert('至少需要兩個選項');
-          return;
-        }
         for (let questArray of this.questArray) {
           if (questArray.quest.length == 0) {
             alert('選項名稱不能為空');
@@ -112,6 +108,8 @@ export class AddQuestOptionComponent {
         }
       }
 
+      // 判斷不是編輯(!this.isEdit)執行新增(push)
+      // 判斷是編輯(this.isEdit)執行資料更新
       if (!this.isEdit) {
         this.saveQuestArray.push({
           id: this.questId,
@@ -135,6 +133,7 @@ export class AddQuestOptionComponent {
         editData.need = this.needCheckBox;
         this.isEdit = false;
       }
+      // 資料新增完後將資料重置與塞進service中
       this.resertQuest();
       this.resertQuestArray();
       this.pushQuestArrat();
@@ -144,6 +143,7 @@ export class AddQuestOptionComponent {
   }
 
   del() {
+    // 判斷如果當前選項有溝選擇選擇刪除
     for (let i = 0; i < this.saveQuestArray.length; i++) {
       if (this.saveQuestArray[i].checkBox) this.saveQuestArray.splice(i, 1);
     }
