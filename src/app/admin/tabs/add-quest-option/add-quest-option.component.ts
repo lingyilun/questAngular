@@ -135,9 +135,9 @@ export class AddQuestOptionComponent {
         editData.need = this.needCheckBox;
         this.isEdit = false;
       }
-      console.log(this.saveQuestArray);
       this.resertQuest();
       this.resertQuestArray();
+      this.pushQuestArrat();
     } else {
       alert('問卷名稱不能為空');
     }
@@ -147,6 +147,7 @@ export class AddQuestOptionComponent {
     for (let i = 0; i < this.saveQuestArray.length; i++) {
       if (this.saveQuestArray[i].checkBox) this.saveQuestArray.splice(i, 1);
     }
+    this.pushQuestArrat();
   }
 
   getQuestStatsName(type: string): string {
@@ -165,7 +166,7 @@ export class AddQuestOptionComponent {
     this.isEdit = true;
   }
 
-  goPreview() {
+  pushQuestArrat() {
     let newQuestArray = [];
     for (let quest of this.saveQuestArray) {
       let newOption = [];
@@ -183,6 +184,7 @@ export class AddQuestOptionComponent {
         options: newOption
       })
     }
+
     let quest = {
       title: this.questService.questData.title,
       sDate: this.questService.questData.sDate,
@@ -191,10 +193,11 @@ export class AddQuestOptionComponent {
       questArray: newQuestArray
     }
 
-    console.log(quest);
-
-
     this.questService.questData = quest;
+  }
+
+  goPreview() {
+    this.pushQuestArrat();
     this.router.navigate(['/questionnaire']);
   }
 }

@@ -28,7 +28,7 @@ export class AddQuestComponent {
     private dateService: DateService,
     private router: Router,
     private questService: QuestService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // 設定選取日期最小值為當天
@@ -48,11 +48,13 @@ export class AddQuestComponent {
   }
 
   goNextTab() {
-    this.questService.questData = {
-      title: this.questName,
-      sDate: this.sDate,
-      eDate: this.eDate,
-      explain: this.questExplain
+    if (!this.questService.questData) {
+      this.questService.questData = {
+        title: this.questName,
+        sDate: this.sDate,
+        eDate: this.eDate,
+        explain: this.questExplain
+      }
     }
     this.router.navigate(['/tabs-admin/add-option']);
   }

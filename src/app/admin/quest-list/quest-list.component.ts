@@ -75,6 +75,7 @@ export class QuestListComponent {
   }
 
   goAdd() {
+    this.questService.questData = null;
     this.questService.questState = 'ADD';
     this.router.navigate(['/tabs-admin/add']);
   }
