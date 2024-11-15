@@ -168,7 +168,6 @@ export class QuestionnaireComponent {
         userAge: this.userAge,
         questArray: this.newQuestArray
       }
-      console.log(this.questService.questData);
 
       this.router.navigate(['/preview']);
     };

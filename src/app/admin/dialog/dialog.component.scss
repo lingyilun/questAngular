@@ -1,0 +1,38 @@
+.questDivCss {
+    border: 1px solid #000;
+    position: relative;
+    padding: 2%;
+    background-color: #ffdbc5;
+    
+    
+    .rmBntCss {
+        margin-left: 5px;
+    }
+
+    .questCss {
+        margin-left: 2%;
+    }
+
+    .addBntCss {
+        float: right;
+        background: #ffa900;
+    }
+
+    .olCss {
+        // overflow為畫面滑動的css
+        // 可單獨設定左右滑動或者上下
+        // 注意要設定滑動內容高/寬度限制
+        // 沒設定會畫面會一直長下去
+        overflow: auto; 
+        height: 25vh;
+    }
+}
+
+.textInputCss {
+    width: 40%;
+}
+
+.selectCss {
+    margin-left: 3%;
+    width: 10%;
+}

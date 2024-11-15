@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>新增問題({{getQuestStatsName(questStats)}})</h2>
+<mat-dialog-content>
+    <div>
+        @if (isEdit) {
+        <span style="color: red;">編輯中！</span><br><br>
+        }
+
+        <label>問題名稱：</label>
+        <input type="text" class="textInputCss" [(ngModel)]="questName">
+
+        <select [(ngModel)]="questStats" class="selectCss" (change)="changeSelect()">
+            <option value="Q">單選</option>
+            <option value="M">多選</option>
+            <option value="T">文字</option>
+        </select>
+        <span style="margin-left: 5%;"></span>
+        <label>是否必填</label>
+        <input type="checkbox" [(ngModel)]="needCheckBox">
+    </div><br>
+    
+    @if (questStats != 'T') {
+    <div class="questDivCss">
+        <button class="addBntCss" (click)="addQuest()">＋</button>
+        <div class="olCss">
+            <ol>
+                @for (quest of questArray;track $index) {
+                <li>
+                    <input class="questCss" [(ngModel)]="quest.quest">
+                    @if ($index > 1) {
+                    <button class="rmBntCss" (click)="rmQuest($index)">一</button>
+                    }
+                </li><br>
+                }
+            </ol>
+        </div>
+    </div><br>
+    }
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button (click)="cancel()">取消</button>
+    <button mat-button (click)="save()">確定</button>
+</mat-dialog-actions>

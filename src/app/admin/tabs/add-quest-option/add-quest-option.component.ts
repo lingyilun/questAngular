@@ -1,9 +1,11 @@
 import { QuestService } from './../../../../@services/quset.service';
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../../dialog/dialog.component';
 
 @Component({
   selector: 'app-add-quest-option',
@@ -17,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './add-quest-option.component.scss'
 })
 export class AddQuestOptionComponent {
+  readonly dialog = inject(MatDialog);
   questName!: string;
   needCheckBox: boolean = false;
   // 多選M 單選Q 文字輸入T
@@ -37,17 +40,8 @@ export class AddQuestOptionComponent {
     if (this.questService.questData.questArray) {
       this.tridyData();
     }
-    this.resertQuestArray();
   }
 
-  resertQuestArray() {
-    // 初始設定預設兩個選項
-    this.questOptionId = 1;
-    this.questArray = [
-      { id: 0, quest: '' },
-      { id: 1, quest: '' }
-    ];
-  }
 
   tridyData() {
     for (let quest of this.questService.questData.questArray) {
@@ -71,28 +65,23 @@ export class AddQuestOptionComponent {
     }
   }
 
-  resertQuest() {
-    this.questName = '';
-    this.needCheckBox = false;
-  }
+  // 開啟Dialog需帶入此問題的類型與編輯時需帶入編輯問題ID
+  openDialog(type: string, editId?: number) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: { type: type, saveQuestArray: this.saveQuestArray, isEdit: this.isEdit, editId },
+      width: '60%'
+    });
 
-  changeSelect() {
-    if (this.questStats == 'T') {
-      this.resertQuestArray();
-    }
-  }
-
-  rmQuest(index: number) {
-    if (this.questArray.length > 1) {
-      this.questArray.splice(index, 1);
-    }
-  }
-
-  addQuest() {
-    this.questOptionId++;
-    this.questArray.push(
-      { id: this.questOptionId, quest: '' }
-    );
+    dialogRef.afterClosed().subscribe(result => {
+      // 判斷有沒有回傳內容
+      // 有的話再去做判斷新增內容或者編輯
+      if (result) {
+        if (!this.isEdit) {
+          this.saveQuestArray = result;
+        }
+        this.pushQuestArrat();
+      }
+    });
   }
 
   saveQuest() {
@@ -134,8 +123,6 @@ export class AddQuestOptionComponent {
         this.isEdit = false;
       }
       // 資料新增完後將資料重置與塞進service中
-      this.resertQuest();
-      this.resertQuestArray();
       this.pushQuestArrat();
     } else {
       alert('問卷名稱不能為空');
@@ -158,23 +145,21 @@ export class AddQuestOptionComponent {
   }
 
   edit(quset: any) {
-    this.questName = quset.questName;
-    this.needCheckBox = quset.need;
-    this.questStats = quset.questStats;
-    this.questArray = quset.questArray;
-    this.editId = quset.id;
     this.isEdit = true;
+    this.openDialog(quset.questStats, quset.id)
   }
 
   pushQuestArrat() {
     let newQuestArray = [];
     for (let quest of this.saveQuestArray) {
       let newOption = [];
-      for (let array of quest.questArray) {
-        newOption.push({
-          optionName: array.quest,
-          code: array.id
-        })
+      if (quest.questStats != 'T') {
+        for (let array of quest.questArray) {
+          newOption.push({
+            optionName: array.quest,
+            code: array.id
+          })
+        }
       }
       newQuestArray.push({
         questId: quest.id,
